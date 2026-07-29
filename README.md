@@ -1,6 +1,6 @@
 <div align="center">
 
-  # 🛡️ Lie Trainer
+  # 🛡️ Quantum Lie Trainer
 
   **Phòng tập phản xạ chống lừa đảo tài chính — kiểm tra tin nhắn/lời mời đầu tư nghi vấn, luyện phản xạ qua cuộc gọi lừa đảo giả lập, và học từ case study thật.**
 
@@ -32,13 +32,13 @@
 
 Lừa đảo tài chính qua điện thoại/tin nhắn (giả ngân hàng, giả công an, trúng thưởng giả, đầu tư giả...) nhắm nhiều vào nhóm ít cập nhật công nghệ. Vấn đề không chỉ là **thiếu thông tin** mà là **thiếu phản xạ** — biết lý thuyết "đừng đọc OTP cho ai" nhưng khi bị dồn ép qua điện thoại thật vẫn dễ mắc bẫy vì hoảng loạn.
 
-**Lie Trainer** tiếp cận theo hướng "phòng tập": thay vì chỉ đọc cảnh báo, người dùng luyện tập tình huống giả lập có chấm điểm, đồng thời có công cụ kiểm tra nhanh một tin nhắn/lời mời đang nhận được.
+**Quantum Lie Trainer** tiếp cận theo hướng "phòng tập": thay vì chỉ đọc cảnh báo, người dùng luyện tập tình huống giả lập có chấm điểm, đồng thời có công cụ kiểm tra nhanh một tin nhắn/lời mời đang nhận được.
 
 ## 2. Ba module
 
 | Module | Chức năng | Vị trí code |
 |---|---|---|
-| 🔍 **Camera Kính Lúp** | Dán văn bản (hoặc đọc bằng giọng nói) một tin nhắn/lời mời nghi vấn → chấm điểm rủi ro, chỉ ra loại lừa đảo và các dấu hiệu (`red_flags`) cụ thể | `backend/vision/` |
+| 🔍 **Camera kính lúp** | Dán văn bản (hoặc đọc bằng giọng nói) một tin nhắn/lời mời nghi vấn → chấm điểm rủi ro, chỉ ra loại lừa đảo và các dấu hiệu (`red_flags`) cụ thể | `backend/vision/` |
 | 📞 **Cuộc gọi giả lập** | Cuộc gọi lừa đảo giả lập theo 3 kịch bản (giả ngân hàng, giả công an, giả trúng thưởng), có thoại bằng giọng nói; sau cuộc gọi được chấm điểm, chỉ ra từng lỗi ("đã đọc OTP", "đồng ý chuyển khoản"...) kèm gợi ý khắc phục | `backend/arena/` |
 | 📚 **Kho kiến thức & Daily Scam Alert** | 20 case study thật (11 loại lừa đảo khác nhau), gợi ý case tiếp theo cùng chuyên đề, gamification nhẹ (điểm/streak/huy hiệu) | `backend/knowledge/` |
 
@@ -100,9 +100,9 @@ bash scripts/smoke.sh # kiểm tra nhanh trước khi demo: pytest + import + ba
 
 Bản demo hiện tại chạy hoàn toàn bằng **luật cố định (rule-based)**, không gọi LLM/API nào — chạy offline, không tốn phí (trừ Whisper/gTTS cần tải model hoặc mạng cho phần giọng nói):
 
-- **Camera Kính Lúp** — so khớp từ khoá theo 4 nhóm lừa đảo trong `RISK_KEYWORDS` (`analyzer.py`), cộng điểm theo số từ khoá khớp.
-- **Scam Arena** — kịch bản hội thoại cố định (`SCENARIOS` trong `scam_llm.py`), có nhánh rẽ đơn giản khi người dùng dùng từ khoá từ chối; chấm điểm "sập bẫy" qua từ khoá + thời gian phản hồi (**proxy đơn giản, không phải đo cảm xúc thật**).
-- **Kho tri thức** — case study biên tập thủ công trong `case_studies.json`, đúng tinh thần "đội ngũ duyệt trước khi phát hành".
+- **Camera kính lúp** — so khớp từ khoá theo 4 nhóm lừa đảo trong `RISK_KEYWORDS` (`analyzer.py`), cộng điểm theo số từ khoá khớp.
+- **Cuộc gọi giả lập** — kịch bản hội thoại cố định (`SCENARIOS` trong `scam_llm.py`), có nhánh rẽ đơn giản khi người dùng dùng từ khoá từ chối; chấm điểm "sập bẫy" qua từ khoá + thời gian phản hồi (**proxy đơn giản, không phải đo cảm xúc thật**).
+- **Kho kiến thức** — case study biên tập thủ công trong `case_studies.json`, đúng tinh thần "đội ngũ duyệt trước khi phát hành".
 
 Ngoài ra, `backend/models/quantum_scorer.py` là một **prototype độc lập**: mạch lượng tử 2-qubit (PennyLane, `default.qubit`) nhận 2 đặc trưng tài chính (`roi_claim`, `urgency_score`) và trả về điểm rủi ro. Module này **chưa được gọi từ bất kỳ endpoint nào** và `pennylane` chưa có trong `requirements.txt` — đây là hướng thử nghiệm cho phần "quantum" của ý tưởng, chưa phải tính năng chạy được trong bản demo.
 
