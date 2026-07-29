@@ -1,0 +1,13 @@
+# streamlit đã bị gỡ — frontend mới (HTML/CSS/JS + FastAPI) đã hoàn tất, không còn cần Streamlit.
+fastapi>=0.115            # backend/api/ - lop API tach frontend/backend
+uvicorn>=0.30              # chay FastAPI: uvicorn backend.api.main:app --reload
+python-multipart>=0.0.9    # can cho UploadFile (backend/api/voice_endpoint.py)
+pydantic>=2.9             # backend/models/schemas.py - contract dung chung
+gTTS>=2.5                 # backend/arena/voice.py - text to speech (offline, free)
+openai-whisper>=20231117  # backend/arena/voice.py - speech to text (local, free)
+pytest>=8.3                # tests/
+
+# Chua can "anthropic" o ban demo nay vi analyzer.py va scam_llm.py
+# dang dung luat co dinh (rule-based), khong goi AI. Them lai "anthropic"
+# khi nang cap len AI that - xem docs/ARCHITECTURE.md.
+

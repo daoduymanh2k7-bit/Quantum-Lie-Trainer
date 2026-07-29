@@ -1,0 +1,2076 @@
+/* ============================================================
+   QUANTUM LIE TRAINER — design tokens
+   Hướng: "phòng an ninh số" — đáng tin, điềm tĩnh, không giật gân.
+   Đối tượng: người lớn tuổi -> chữ to, tương phản cao, ít bước.
+   ============================================================ */
+:root {
+  /* Màu nền */
+  --color-bg: #f3f5f9;
+  --color-bg-1: #eef1fb;
+  --color-bg-2: #edf4f1;
+  --color-surface: #FFFFFF;
+  --color-border: #e6e9f2;
+
+  /* Chữ */
+  --color-ink: #1e1b4b;
+  --color-ink-muted: #6b7280;
+  --color-ink-faint: #9ca3af;
+
+  /* Thương hiệu — gradient tím/xanh cyan */
+  --color-primary: #8b5cf6;
+  --color-primary-dark: #6d28d9;
+  --color-heading: #1e1b4b;
+  --color-accent: #22d3ee;
+  --color-accent-dark: #0891b2;
+  --grad-brand: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+
+  /* Mức rủi ro (dùng cho gauge + badge) */
+  --color-safe: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+
+  /* Nền mức rủi ro */
+  --color-safe-bg: #e7f7ed;
+  --color-warning-bg: #fdf1de;
+  --color-danger-bg: #fbe6e4;
+
+  /* Nền đặc biệt & track */
+  --color-surface-tint: #eef0ff;
+  --color-bubble-scammer: #eef0ff;
+  --color-gauge-track: #e6e9f2;
+
+  /* Kiểu chữ */
+  --font-display: "Plus Jakarta Sans", "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  --radius: 16px;
+  --shadow-card: 0 4px 24px rgba(30, 27, 75, 0.06);
+}
+
+/* ---------------- Giao diện tối (bật qua nút trong sidebar) ---------------- */
+html[data-theme="dark"] {
+  --color-bg: #0f0e18;
+  --color-bg-1: #201f38;
+  --color-bg-2: #16241f;
+  --color-surface: #1c1b2b;
+  --color-border: #302f42;
+
+  --color-ink: #f1f0fa;
+  --color-ink-muted: #a8a6c0;
+  --color-ink-faint: #78769a;
+
+  --color-primary: #8b5cf6;
+  --color-primary-dark: #6d28d9;
+  --color-heading: #f1f0fa;
+  --color-accent: #22d3ee;
+  --color-accent-dark: #0891b2;
+
+  /* Mức rủi ro tối ưu hóa tương phản cho dark mode */
+  --color-safe: #59C998;
+  --color-warning: #ECC06C;
+  --color-danger: #F18F84;
+
+  /* Nền mức rủi ro trong dark mode */
+  --color-safe-bg: #132B20;
+  --color-warning-bg: #352912;
+  --color-danger-bg: #331916;
+
+  /* Nền đặc biệt & track */
+  --color-surface-tint: #2a2850;
+  --color-bubble-scammer: #2a2850;
+  --color-gauge-track: #302f42;
+
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"] .tab-bar {
+  background: var(--color-surface);
+}
+
+html[data-theme="dark"] .tagline {
+  color: #A9BAD0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 18px;
+  /* chữ to mặc định — voice-first, người lớn tuổi */
+  line-height: 1.55;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  color: var(--color-heading);
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+button {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------------- Shell: sidebar cố định bên trái + nội dung bên phải ---------------- */
+:root {
+  --sidebar-w-collapsed: 76px;
+  --sidebar-w-expanded: 260px;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  align-items: stretch;
+}
+
+.app-sidebar {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+  width: var(--sidebar-w-expanded);
+  flex-shrink: 0;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  color: var(--color-ink);
+  z-index: 60;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.22s ease;
+}
+
+/* Thu nhỏ: chỉ còn dải icon — tính năng thu/mở vẫn giữ nguyên qua sidebar-toggle-btn */
+.app-sidebar:not(.is-expanded) {
+  width: var(--sidebar-w-collapsed);
+}
+
+.app-sidebar:not(.is-expanded) .sidebar-label {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.app-sidebar.is-expanded .sidebar-label {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.sidebar-brand-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--grad-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 6px 14px rgba(139, 92, 246, 0.35);
+}
+
+.sidebar-brand-mark svg {
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-brand-text {
+  line-height: 1.15;
+  overflow: hidden;
+}
+
+.sidebar-brand-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.98rem;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.sidebar-brand-sub {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-faint);
+  white-space: nowrap;
+}
+
+.sidebar-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.sidebar-toggle-btn:hover {
+  background: var(--color-bg-1);
+}
+
+.app-sidebar:not(.is-expanded) .sidebar-toggle-btn {
+  display: none;
+}
+
+/* Nav (Camera Kính Lúp / Scam Arena / Kho tri thức) — dùng lại chính .tab-btn cũ */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  color: var(--color-ink-muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab-btn .tab-icon {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.tab-btn.is-active {
+  background: var(--grad-brand);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.28);
+}
+
+.tab-btn:hover:not(.is-active) {
+  background: var(--color-bg-1);
+  color: var(--color-ink);
+}
+
+.sidebar-new-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  margin: 14px 0 4px;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-bg-1);
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background 0.15s ease;
+}
+
+.sidebar-new-btn:hover {
+  background: var(--color-border);
+}
+
+.sidebar-new-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.app-sidebar:not(.is-expanded) .sidebar-new-btn {
+  width: 40px;
+  padding: 0;
+  height: 40px;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+.sidebar-section-label {
+  margin: 18px 4px 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.sidebar-history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  min-height: 0;
+}
+
+.sidebar-history-list li.sidebar-empty {
+  color: var(--color-ink-faint);
+  font-size: 0.8rem;
+  padding: 8px 6px;
+}
+
+.sidebar-history-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  margin-bottom: 2px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-ink-muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-history-item:hover {
+  background: var(--color-bg-1);
+  color: var(--color-ink);
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.app-sidebar.is-expanded .sidebar-bottom {
+  justify-content: flex-start;
+}
+
+/* Bọc nút theme + avatar theo cột: nút theme nằm ngay trên, avatar bên dưới */
+.sidebar-avatar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex-shrink: 0;
+  width: 100%;
+  padding-left: 12px;
+}
+
+.app-sidebar:not(.is-expanded) .sidebar-avatar-wrap {
+  align-items: center;
+  padding-left: 0;
+}
+
+.sidebar-theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  transition: background 0.15s ease;
+  margin-left: 4px; /* Align center axis with avatar's center axis: (34px - 26px)/2 = 4px */
+}
+
+.app-sidebar:not(.is-expanded) .sidebar-theme-btn {
+  margin-left: 0;
+}
+
+.sidebar-theme-btn:hover {
+  background: var(--color-bg-1);
+}
+
+.sidebar-user-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.sidebar-username {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.sidebar-avatar {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: var(--grad-brand);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Logo khiên giờ cũng bấm được để phóng to/thu nhỏ sidebar, giống nút toggle */
+.sidebar-brand-mark {
+  cursor: pointer;
+}
+
+@media (max-width: 780px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .app-sidebar {
+    position: static;
+    height: auto;
+    width: 100% !important;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 14px;
+  }
+
+  .sidebar-top {
+    margin-bottom: 0;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .sidebar-history-list,
+  .sidebar-section-label {
+    display: none;
+  }
+
+  .sidebar-new-btn {
+    width: auto;
+    margin: 0 0 0 8px;
+  }
+
+  .sidebar-bottom {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .sidebar-avatar-wrap {
+    align-items: center;
+    padding-left: 0;
+  }
+
+  .sidebar-theme-btn {
+    margin-left: 0;
+  }
+
+  .sidebar-user-row {
+    justify-content: center;
+  }
+}
+
+/* ---------------- Topbar ---------------- */
+.main-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px clamp(16px, 4vw, 40px) 6px;
+}
+
+.topbar-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--color-ink);
+  margin: 0 0 4px;
+}
+
+.topbar-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.tagline {
+  display: none;
+}
+
+/* giữ để không lỗi nếu còn nơi tham chiếu, brand phụ đã chuyển vào sidebar */
+
+/* ---------------- Main layout ---------------- */
+.app-main {
+  max-width: 1080px;
+  width: 100%;
+  margin: 8px auto 24px;
+  padding: 0 clamp(16px, 4vw, 40px) 40px;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.is-active {
+  display: block;
+  animation: fade-in 0.2s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.panel-sub {
+  color: var(--color-ink-muted);
+  margin-top: 6px;
+}
+
+.hint-label,
+.field-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-ink-muted);
+  display: block;
+  margin: 18px 0 8px;
+}
+
+/* ---------------- Buttons ---------------- */
+.btn-primary,
+.btn-secondary {
+  font-size: 1.08rem;
+  font-weight: 600;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.06);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  background: #C9C2BA;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-heading);
+  border-color: var(--color-border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-primary);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+}
+
+.sample-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.sample-chip {
+  font-size: 0.9rem;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  color: var(--color-heading);
+}
+
+.sample-chip:hover {
+  border-color: var(--color-accent);
+}
+
+/* ---------------- Inputs ---------------- */
+textarea,
+input[type="text"] {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  resize: vertical;
+}
+
+textarea:focus,
+input:focus {
+  border-color: var(--color-accent);
+}
+
+.share-box {
+  background: var(--color-surface-tint);
+  color: var(--color-ink-muted);
+  resize: none;
+  overflow-y: hidden;
+  /* Tự giãn chiều cao theo nội dung (Chrome 123+, Firefox 110+) */
+  field-sizing: content;
+  min-height: 4.5rem;
+}
+
+/* ---------------- Mic button ---------------- */
+.mic-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.btn-mic {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-surface);
+  border: 2px solid var(--color-primary);
+  color: var(--color-heading);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-mic.is-recording {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  color: #fff;
+}
+
+.mic-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-danger);
+  display: inline-block;
+}
+
+.btn-mic.is-recording .mic-dot {
+  background: #fff;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.mic-status {
+  color: var(--color-ink-muted);
+  font-size: 0.92rem;
+}
+
+/* ---------------- Progress ---------------- */
+.progress-box {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  color: var(--color-ink-muted);
+  font-size: 0.95rem;
+}
+
+.progress-box p {
+  margin: 4px 0;
+}
+
+/* ---------------- Vision: khung chat (kiểu Gemini/ChatGPT) ---------------- */
+.chat-tab {
+  padding-bottom: 0;
+}
+
+.chat-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 150px;
+  /* chừa chỗ cho ô nhập cố định phía dưới */
+}
+
+.chat-empty-state {
+  padding-top: 4px;
+}
+
+.chat-bubble {
+  max-width: 88%;
+  animation: fade-in 0.2s ease;
+}
+
+.chat-bubble--user {
+  align-self: flex-end;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 16px 16px 4px 16px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chat-bubble--system {
+  align-self: flex-start;
+  width: 100%;
+}
+
+.chat-bubble--typing {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px 16px 16px 16px;
+  padding: 14px 16px;
+  color: var(--color-ink-muted);
+  font-size: 0.95rem;
+}
+
+.chat-bubble--typing p {
+  margin: 4px 0;
+}
+
+.result-card--inline {
+  margin-top: 0;
+  border-radius: 4px 16px 16px 16px;
+}
+
+.chat-composer {
+  position: fixed;
+  left: var(--sidebar-w-collapsed);
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  background: linear-gradient(to top, var(--color-bg) 55%, rgba(238, 242, 244, 0));
+  padding: 14px 20px 18px;
+  transition: left 0.22s ease;
+}
+
+body.sidebar-is-expanded .chat-composer {
+  left: var(--sidebar-w-expanded);
+}
+
+.composer-box {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 22px;
+  padding: 8px 8px 8px 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.composer-box textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 0;
+  resize: none;
+  max-height: 140px;
+  font-size: 1rem;
+}
+
+.composer-box textarea:focus {
+  border-color: transparent;
+  outline: none;
+}
+
+.composer-icon-btn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-heading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.composer-icon-btn:hover {
+  background: var(--color-border);
+}
+
+.composer-icon-btn.is-recording {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.composer-send-btn {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.composer-send-btn:hover {
+  filter: brightness(1.06);
+  background: var(--color-accent);
+}
+
+.composer-send-btn:disabled {
+  background: #C9C2BA;
+  cursor: not-allowed;
+}
+
+.chat-composer .mic-status {
+  display: block;
+  max-width: 720px;
+  margin: 0 auto 6px;
+  color: var(--color-ink-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .chat-composer {
+    left: var(--sidebar-w-collapsed) !important;
+    padding: 10px 12px 14px;
+  }
+}
+
+/* ---------------- Result card + gauge (SIGNATURE ELEMENT) ---------------- */
+.result-card {
+  margin-top: 20px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 22px;
+}
+
+.gauge-wrap {
+  text-align: center;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.risk-gauge {
+  width: 220px;
+  max-width: 100%;
+}
+
+.gauge-track {
+  fill: none;
+  stroke: var(--color-gauge-track);
+  stroke-width: 16;
+  stroke-linecap: round;
+}
+
+.gauge-fill {
+  fill: none;
+  stroke: var(--color-safe);
+  stroke-width: 16;
+  stroke-linecap: round;
+  stroke-dasharray: 251;
+  stroke-dashoffset: 251;
+  transition: stroke-dashoffset 0.8s cubic-bezier(.4, 0, .2, 1), stroke 0.4s;
+}
+
+.gauge-needle {
+  stroke: var(--color-ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transform-origin: 100px 110px;
+  transition: transform 0.8s cubic-bezier(.4, 0, .2, 1);
+}
+
+.gauge-hub {
+  fill: var(--color-ink);
+}
+
+.gauge-readout {
+  margin-top: -30px;
+}
+
+.gauge-score {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.gauge-max {
+  font-family: var(--font-mono);
+  color: var(--color-ink-muted);
+  font-size: 1.1rem;
+}
+
+.gauge-level {
+  display: inline-block;
+  margin-top: 6px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+.gauge-level.LOW {
+  background: var(--color-safe-bg);
+  color: var(--color-safe);
+}
+
+.gauge-level.MEDIUM {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.gauge-level.HIGH {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.result-card h3 {
+  margin-top: 14px;
+}
+
+.result-explanation {
+  color: var(--color-ink-muted);
+}
+
+.flag-list,
+.mistake-list {
+  padding-left: 22px;
+  margin: 6px 0;
+}
+
+.flag-list li {
+  margin-bottom: 4px;
+}
+
+.why-box {
+  margin-top: 16px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
+}
+
+.why-box summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.why-box p {
+  color: var(--color-ink-muted);
+  margin-top: 8px;
+}
+
+.history-box {
+  margin-top: 18px;
+}
+
+.history-box summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-heading);
+  padding: 4px 0;
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-list li {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.92rem;
+}
+
+/* ---------------- Arena ---------------- */
+.scenario-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.scenario-banner {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+
+.transcript {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.turn {
+  padding: 12px 16px;
+  border-radius: 14px;
+  max-width: 88%;
+  font-size: 0.98rem;
+}
+
+.turn.user {
+  align-self: flex-end;
+  background: var(--color-primary);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.turn.scammer {
+  align-self: flex-start;
+  background: var(--color-bubble-scammer);
+  color: var(--color-ink);
+  border-bottom-left-radius: 4px;
+}
+
+.turn-role {
+  display: block;
+  font-size: 0.78rem;
+  opacity: 0.75;
+  margin-bottom: 2px;
+}
+
+.score-line {
+  font-size: 1.1rem;
+}
+
+.latency-note {
+  color: var(--color-ink-muted);
+  font-size: 0.9rem;
+}
+
+.mistake-list li {
+  margin-bottom: 10px;
+}
+
+.mistake-tip {
+  display: block;
+  color: var(--color-ink-muted);
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.success-note {
+  color: var(--color-safe);
+  font-weight: 600;
+}
+
+/* ---------------- Knowledge ---------------- */
+.app-main:has(#tab-knowledge.is-active) {
+  max-width: 1040px;
+  transition: max-width 0.3s ease;
+}
+
+.stat-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-box {
+  flex: 1;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 14px;
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.stat-label {
+  color: var(--color-ink-muted);
+  font-size: 0.85rem;
+}
+
+.kb-category {
+  color: var(--color-accent-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.kb-takeaway {
+  background: var(--color-surface-tint);
+  border-left: 3px solid var(--color-accent);
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.kb-source {
+  color: var(--color-ink-muted);
+  font-size: 0.85rem;
+}
+
+.choice-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.choice-row .btn-secondary {
+  flex: 1;
+}
+
+.kb-mode-switch {
+  display: flex;
+  gap: 6px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 6px;
+  margin-bottom: 16px;
+  max-width: 480px;
+}
+
+.kb-mode-switch .mode-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--color-heading, var(--color-primary-dark));
+  font-weight: 600;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.kb-mode-switch .mode-btn:hover {
+  background: var(--color-bg);
+}
+
+.kb-mode-switch .mode-btn.is-active {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.kb-mode-panel {
+  animation: fade-in 0.2s ease;
+}
+
+.kb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.kb-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.kb-list-item:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.kb-list-item-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.kb-list-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kb-list-item-body strong {
+  color: var(--color-heading, var(--color-primary-dark));
+  font-size: 0.98rem;
+}
+
+.kb-list-item-duration {
+  font-size: 0.82rem;
+  color: var(--color-ink-muted);
+}
+
+.kb-listen-text {
+  line-height: 1.7;
+  margin: 12px 0;
+}
+
+.kb-listen-error {
+  color: var(--color-warning);
+  font-size: 0.9rem;
+}
+
+.kb-alert-banner {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-card);
+}
+
+/* Tiến trình tổng quát thành tích */
+.kb-progress-container {
+  margin: 14px 0 18px 0;
+}
+
+.kb-progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  margin-bottom: 6px;
+}
+
+.kb-progress-bar-bg {
+  background: var(--color-bg);
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.kb-progress-bar-fill {
+  background: var(--color-accent);
+  height: 100%;
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.3s cubic-bezier(.4, 0, .2, 1);
+}
+
+#kb-achievements-card {
+  margin-top: 16px;
+}
+
+.kb-achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.kb-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  padding: 12px 6px;
+  border-radius: 12px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg);
+  opacity: 0.5;
+  filter: grayscale(1);
+  transition: opacity 0.3s, filter 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.kb-badge.unlocked {
+  opacity: 1;
+  filter: none;
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+
+.kb-badge.unlocked:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-card);
+}
+
+.kb-badge-icon {
+  font-size: 1.6rem;
+}
+
+.kb-badge-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* Bố cục 2 cột trên desktop/tablet rộng (>= 900px) */
+@media (min-width: 900px) {
+  .kb-layout-container {
+    display: grid;
+    grid-template-columns: 66% 34%;
+    gap: 24px;
+    align-items: start;
+  }
+
+  #kb-achievements-card {
+    position: sticky;
+    top: 20px;
+    margin-top: 0;
+  }
+
+  .kb-achievements-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .kb-badge {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .kb-badge-icon {
+    font-size: 1.4rem;
+  }
+
+  .kb-badge-name {
+    font-size: 0.85rem;
+    flex-grow: 1;
+  }
+
+  /* Trạng thái khóa/mở khóa */
+  .kb-badge::after {
+    content: "Khóa";
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-ink-muted);
+    background: var(--color-bg);
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .kb-badge.unlocked::after {
+    content: "Mở khóa";
+    color: #fff;
+    background: var(--color-safe);
+    border-color: var(--color-safe);
+  }
+}
+
+.kb-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--color-primary-dark);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-card);
+  font-weight: 600;
+  font-size: 0.92rem;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.kb-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ---------------- Footer ---------------- */
+.app-footer {
+  text-align: center;
+  color: var(--color-ink-muted);
+  font-size: 0.82rem;
+  padding: 20px;
+}
+
+/* ---------------- Small screens ---------------- */
+@media (max-width: 420px) {
+  body {
+    font-size: 17px;
+  }
+
+  .tab-btn span:last-child {
+    display: none;
+  }
+
+  .tab-btn {
+    padding: 12px 4px;
+  }
+}
+
+/* =========================================================
+   TAB 2: SCAM ARENA - GIAO DIỆN CHUYÊN BIỆT CHO NGƯỜI CAO TUỔI
+   ========================================================= */
+
+/* --- Bố cục chung khu vực Arena --- */
+#tab-arena.is-active {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px 10px;
+}
+
+.arena-header-elderly {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.arena-header-elderly h2 {
+  font-size: 32px;
+  color: var(--text-main, #1e293b);
+  margin-bottom: 10px;
+}
+
+.arena-header-elderly .panel-sub {
+  font-size: 20px;
+  color: #64748b;
+}
+
+/* --- Nút bấm khổng lồ (Dùng chung cho các nút hành động chính) --- */
+.btn-huge {
+  padding: 20px !important;
+  font-size: 22px !important;
+  border-radius: 16px !important;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.2s, opacity 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-huge:hover {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.btn-secondary.btn-huge {
+  background-color: var(--bg-card, #f8fafc);
+  border: 2px solid var(--border-color, #cbd5e1);
+  color: var(--text-main, #0f172a);
+  margin-top: 10px;
+}
+
+/* ================= MÀN HÌNH 1: CHỌN KỊCH BẢN ================= */
+.scenario-list-elderly {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+/* Style cho các nút kịch bản do JS sinh ra */
+.scenario-list-elderly .scenario-btn {
+  background: var(--bg-card, #ffffff);
+  border: 2px solid var(--border-color, #cbd5e1);
+  padding: 25px 20px;
+  border-radius: 16px;
+  font-size: 22px;
+  color: var(--text-main, #0f172a);
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.scenario-list-elderly .scenario-btn strong {
+  display: block;
+  font-size: 24px;
+}
+
+.scenario-list-elderly .scenario-btn:hover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.05);
+  transform: translateX(5px);
+}
+
+/* ================= MÀN HÌNH 2: CUỘC GỌI THỰC CHIẾN ================= */
+.phone-call-ui {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%) !important;
+  border-radius: 36px !important;
+  /* Bo góc tròn như điện thoại thật */
+  padding: 50px 20px 40px 20px !important;
+  color: white !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  min-height: 650px;
+  margin: 20px auto !important;
+  max-width: 420px !important;
+  /* Kích thước chuẩn hẹp như màn hình điện thoại */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+  border: 8px solid #334155 !important;
+  /* Viền điện thoại */
+}
+
+.call-header {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.caller-avatar-ring {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 15px auto;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-ring 2s infinite;
+}
+
+.caller-avatar {
+  width: 90px;
+  height: 90px;
+  background-color: #475569;
+  border-radius: 50%;
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.caller-name {
+  font-size: 30px !important;
+  font-weight: bold;
+  color: #ffffff !important;
+  margin-bottom: 15px;
+}
+
+.call-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  color: #cbd5e1;
+}
+
+.pulsing-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: blink 1s infinite;
+}
+
+.call-body {
+  width: 100%;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.status-indicator {
+  font-size: 16px;
+  color: #94a3b8;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.subtitle-box {
+  background: rgba(0, 0, 0, 0.6) !important;
+  border-radius: 20px !important;
+  padding: 25px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#arena-transcript {
+  font-size: 24px !important;
+  line-height: 1.5 !important;
+  color: #fcd34d !important;
+  margin: 0 !important;
+  font-weight: 600 !important;
+}
+
+.call-body-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-replay-voice {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #cbd5e1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-replay-voice:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+}
+
+#arena-audio-player {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.call-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-cancel-call {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: #cbd5e1 !important;
+  box-shadow: none !important;
+}
+
+/* ---------------- Topbar icon buttons (dùng cho nút phụ trong topbar) ---------------- */
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-ink-muted);
+  flex-shrink: 0;
+}
+
+.icon-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.call-btn {
+  width: 100% !important;
+  padding: 20px !important;
+  border-radius: 50px !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px;
+  cursor: pointer;
+  border: none !important;
+  color: white !important;
+  transition: transform 0.2s;
+}
+
+.call-btn:active {
+  transform: scale(0.95);
+}
+
+.btn-mic {
+  background-color: #334155 !important;
+}
+
+.btn-mic.recording {
+  background-color: #eab308 !important;
+  color: #000 !important;
+  animation: pulse-ring 1s infinite;
+}
+
+.btn-end-call {
+  background-color: #ef4444 !important;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+  margin-top: 10px;
+}
+
+/* ================= MÀN HÌNH 3: KẾT QUẢ & CHẤM ĐIỂM ================= */
+.result-card-elderly {
+  background: var(--bg-card, #ffffff);
+  border: 2px solid var(--border-color, #e2e8f0);
+  border-radius: 24px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+#arena-badge {
+  font-size: 28px;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 35px;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 2px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Khối điểm tròn to */
+.score-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--bg-main, #f8fafc);
+  border: 14px solid #ef4444;
+  /* Mặc định là đỏ cảnh báo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px auto;
+  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.05), 0 4px 20px rgba(239, 68, 68, 0.2);
+}
+
+.score-circle p {
+  font-size: 18px;
+  color: #64748b;
+  margin: 0 0 5px 0;
+  font-weight: bold;
+}
+
+.score-circle strong {
+  font-size: 72px;
+  color: var(--text-main, #0f172a);
+  line-height: 1;
+}
+
+.score-circle span {
+  font-size: 22px;
+  color: #94a3b8;
+}
+
+.latency-note {
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 35px;
+}
+
+/* Hộp đánh giá lỗi */
+.mistakes-box {
+  background: var(--bg-main, #f1f5f9);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: left;
+  margin-bottom: 30px;
+  border: 1px solid var(--border-color, #e2e8f0);
+}
+
+.field-label-large {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-main, #0f172a);
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 15px;
+}
+
+.mistake-list-elderly {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mistake-list-elderly li {
+  font-size: 22px;
+  /* Chữ siêu to dễ đọc */
+  line-height: 1.6;
+  margin-bottom: 20px;
+  padding-left: 45px;
+  position: relative;
+  color: var(--text-main, #1e293b);
+}
+
+.mistake-list-elderly li::before {
+  content: "👉";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 28px;
+}
+
+/* Trạng thái thành công khi không có lỗi */
+.success-box {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 30px;
+  border-radius: 16px;
+  border: 2px solid rgba(34, 197, 94, 0.3);
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* --- Hiệu ứng Animation --- */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ================= FIX LỖI KHÔNG ẨN ĐƯỢC MÀN HÌNH ================= */
+#tab-arena [hidden] {
+  display: none !important;
+}
+
+/* ---------------- Attachments in Composer ---------------- */
+.attachment-preview-row {
+  max-width: 720px;
+  margin: 0 auto 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.attachment-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 6px 12px;
+  max-width: 260px;
+  box-shadow: var(--shadow-card);
+  animation: fade-in 0.15s ease;
+}
+
+.attachment-chip img {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.attachment-file-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.attachment-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.attachment-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.attachment-size {
+  font-size: 0.7rem;
+  color: var(--color-ink-muted);
+}
+
+.attachment-remove-btn {
+  border: none;
+  background: transparent;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 0.85rem;
+  line-height: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.attachment-remove-btn:hover {
+  background: var(--color-bg-1);
+  color: var(--color-danger);
+}
+
+/* ---------------- Attachments in Chat Thread ---------------- */
+.chat-attachment-img {
+  max-width: 100%;
+  max-height: 240px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  display: block;
+  object-fit: cover;
+}
+
+.chat-attachment-file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 8px 14px;
+  margin-bottom: 8px;
+  max-width: 320px;
+}
+
+html[data-theme="light"] .chat-attachment-file {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.chat-attachment-file .attachment-name {
+  color: inherit;
+}
+
+.chat-attachment-file .attachment-size {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+html[data-theme="light"] .chat-attachment-file .attachment-size {
+  color: var(--color-ink-muted);
+}

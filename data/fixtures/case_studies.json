@@ -1,0 +1,172 @@
+[
+  {
+    "case_id": "0001",
+    "scam_category": "giả mạo ngân hàng",
+    "title": "Giả nhân viên ngân hàng gọi \"khóa thẻ khẩn cấp\"",
+    "summary": "Nạn nhân nhận cuộc gọi tự xưng là nhân viên ngân hàng, thông báo thẻ bị khóa do giao dịch bất thường và yêu cầu đọc mã OTP để \"mở khóa gấp\". Sau khi đọc mã, toàn bộ số dư trong tài khoản bị chuyển đi trong vòng vài phút.",
+    "takeaway": "Ngân hàng thật không bao giờ gọi điện hỏi mã OTP. Khi nghi ngờ, hãy gác máy và gọi lại qua số hotline in trên thẻ/ứng dụng ngân hàng.",
+    "source": "Tổng hợp từ báo chí",
+    "video_url": null,
+    "audio_script": "Chị Lan đang ở nhà thì nhận được cuộc gọi từ một số lạ. Đầu dây bên kia xưng là nhân viên ngân hàng, giọng gấp gáp: thẻ của chị vừa phát sinh giao dịch bất thường ở nước ngoài, hệ thống đã tạm khóa thẻ để bảo vệ tài khoản. Để mở khóa ngay, chị chỉ cần đọc giúp mã OTP vừa được gửi về điện thoại. Vì lo lắng, chị Lan đọc mã mà không kịp suy nghĩ. Chưa đầy năm phút sau, toàn bộ số dư trong tài khoản đã biến mất. Sự thật là: không ngân hàng nào gọi điện thoại để hỏi mã OTP của khách hàng. Mã OTP là chìa khóa cuối cùng bảo vệ tài khoản, chỉ dùng khi chính chủ tài khoản thực hiện giao dịch, không bao giờ được đọc cho bất kỳ ai qua điện thoại, kể cả người tự xưng là nhân viên ngân hàng. Nếu nhận được cuộc gọi tương tự, cách an toàn nhất là gác máy ngay, sau đó tự gọi lại qua số hotline chính thức in trên mặt sau thẻ hoặc trong ứng dụng ngân hàng để xác minh."
+  },
+  {
+    "case_id": "0002",
+    "scam_category": "giả mạo ngân hàng",
+    "title": "Link giả mạo trang đăng nhập ngân hàng",
+    "summary": "Tin nhắn SMS giả danh ngân hàng gửi link \"xác minh tài khoản\" dẫn đến trang web giả giao diện giống hệt ngân hàng thật. Nạn nhân nhập tài khoản, mật khẩu, mã OTP và bị chiếm quyền truy cập.",
+    "takeaway": "Không bấm vào link trong tin nhắn lạ, kể cả khi tên hiển thị là ngân hàng. Luôn gõ trực tiếp địa chỉ ứng dụng/website chính thức.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0003",
+    "scam_category": "đầu tư giả",
+    "title": "Sàn đầu tư ảo cam kết lãi 30%/tháng",
+    "summary": "Một nhóm trên mạng xã hội mời tham gia sàn đầu tư tài chính, cam kết lãi 30%/tháng và \"hoàn vốn nếu thua lỗ\". Ban đầu nạn nhân rút lãi thành công vài lần để tạo lòng tin, sau đó nạp số tiền lớn thì sàn biến mất.",
+    "takeaway": "Lãi suất cao bất thường + cam kết hoàn vốn là dấu hiệu kinh điển của mô hình lừa đảo Ponzi. Không có khoản đầu tư hợp pháp nào \"chắc chắn không lỗ\".",
+    "source": "Tổng hợp từ báo chí",
+    "video_url": null,
+    "audio_script": "Anh Hùng được một người bạn trong nhóm Zalo giới thiệu một sàn đầu tư tài chính rất hấp dẫn: cam kết lãi suất ba mươi phần trăm mỗi tháng, và nếu thua lỗ sẽ được hoàn lại vốn. Tháng đầu tiên, anh nạp thử một khoản nhỏ và rút lãi thành công ngay hôm sau, đúng như cam kết. Tin tưởng hơn, tháng thứ hai anh nạp toàn bộ tiền tiết kiệm nhiều năm vào sàn này. Chỉ vài ngày sau, ứng dụng báo lỗi, không thể đăng nhập, và người giới thiệu cũng biến mất khỏi nhóm chat. Đây là chiêu thức lừa đảo kinh điển gọi là mô hình Ponzi: kẻ gian dùng chính tiền của người sau trả lãi cho người trước để tạo lòng tin, đến khi số tiền nạp vào đủ lớn thì sập sàn và ôm trọn. Bài học quan trọng nhất: không có khoản đầu tư hợp pháp nào có thể cam kết lãi suất cố định cao bất thường, càng không thể cam kết chắc chắn không thua lỗ. Chỉ nên đầu tư qua các tổ chức được cấp phép chính thức bởi cơ quan quản lý nhà nước."
+  },
+  {
+    "case_id": "0004",
+    "scam_category": "đầu tư giả",
+    "title": "Mời đầu tư tiền ảo qua ứng dụng giả mạo",
+    "summary": "Nạn nhân được mời tải một ứng dụng đầu tư tiền ảo không rõ nguồn gốc, hiển thị số dư và lợi nhuận tăng liên tục trên giao diện app. Khi cố rút tiền thật, ứng dụng yêu cầu đóng thêm \"phí xác minh\" nhiều lần rồi chặn tài khoản.",
+    "takeaway": "Số dư hiển thị trên app không đồng nghĩa với tiền thật. Chỉ dùng các sàn/app được cấp phép chính thức, không tải app qua link được gửi riêng.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0005",
+    "scam_category": "trúng thưởng giả",
+    "title": "Trúng thưởng 500 triệu từ chương trình tri ân khách hàng",
+    "summary": "Nạn nhân nhận tin nhắn/cuộc gọi thông báo trúng giải đặc biệt 500 triệu đồng, yêu cầu đóng trước 2 triệu đồng \"phí thủ tục nhận thưởng\" trong 24h nếu không sẽ mất quyền lợi.",
+    "takeaway": "Không có chương trình trúng thưởng hợp pháp nào bắt người thắng đóng tiền trước khi nhận giải. Yêu cầu đóng phí trước luôn là dấu hiệu lừa đảo.",
+    "source": "Tổng hợp từ báo chí",
+    "video_url": null
+  },
+  {
+    "case_id": "0006",
+    "scam_category": "trúng thưởng giả",
+    "title": "Trúng thưởng qua tin nhắn Zalo/Facebook giả mạo thương hiệu",
+    "summary": "Kẻ gian lập fanpage giả mạo thương hiệu lớn, chạy quảng cáo \"quay số trúng thưởng\", sau đó nhắn tin riêng cho người tham gia yêu cầu cung cấp thông tin cá nhân và chuyển phí vận chuyển quà tặng.",
+    "takeaway": "Kiểm tra fanpage có tick xanh chính chủ và đối chiếu thông tin chương trình trên kênh chính thức của thương hiệu trước khi cung cấp bất kỳ thông tin nào.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0007",
+    "scam_category": "giả công an/cơ quan chức năng",
+    "title": "Giả danh công an điều tra vụ án rửa tiền",
+    "summary": "Nạn nhân nhận cuộc gọi từ người tự xưng điều tra viên, thông báo số điện thoại/tài khoản liên quan đến đường dây rửa tiền, yêu cầu chuyển toàn bộ tiền vào \"tài khoản tạm giữ\" để \"chứng minh trong sạch\", đồng thời dọa không được kể cho ai vì vụ án đang bảo mật.",
+    "takeaway": "Cơ quan điều tra thật không làm việc qua điện thoại và không yêu cầu chuyển tiền để \"chứng minh vô tội\". Yêu cầu giữ bí mật với người thân là dấu hiệu rõ ràng của lừa đảo.",
+    "source": "Tổng hợp từ báo chí",
+    "video_url": null,
+    "audio_script": "Ông Tâm, sáu mươi tuổi, nhận được cuộc gọi từ một người tự xưng là điều tra viên công an. Người này thông báo số điện thoại của ông có liên quan đến một đường dây rửa tiền xuyên quốc gia đang bị điều tra, và để chứng minh mình trong sạch, ông cần chuyển toàn bộ tiền tiết kiệm vào một tài khoản gọi là tài khoản tạm giữ của cơ quan điều tra trong hai mươi bốn giờ. Kẻ gian còn dặn dò không được kể chuyện này cho bất kỳ ai, kể cả con cái, vì vụ án đang trong giai đoạn bảo mật. Quá hoảng sợ, ông Tâm suýt chuyển hết số tiền dưỡng già, may mắn con gái phát hiện kịp thời và gọi điện trực tiếp đến công an phường để xác minh, mới biết đó là lừa đảo. Cần nhớ: cơ quan điều tra thật không bao giờ làm việc hay yêu cầu chuyển tiền qua điện thoại, không bao giờ yêu cầu giữ bí mật với người thân trong gia đình. Đây chính là dấu hiệu nhận biết rõ ràng nhất của loại lừa đảo giả danh công an."
+  },
+  {
+    "case_id": "0008",
+    "scam_category": "giả công an/cơ quan chức năng",
+    "title": "Giả mạo cán bộ thuế yêu cầu \"nộp phạt online\"",
+    "summary": "Kẻ gian gọi điện tự xưng cán bộ thuế, thông báo cá nhân nợ thuế hoặc khai sai thông tin, yêu cầu nộp phạt ngay qua chuyển khoản để tránh bị khởi kiện.",
+    "takeaway": "Cơ quan thuế không thu phạt qua điện thoại/chuyển khoản cá nhân. Mọi thông báo thuế chính thức đều qua văn bản và cổng dịch vụ công.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0009",
+    "scam_category": "tuyển dụng việc nhẹ lương cao",
+    "title": "\"Việc nhẹ lương cao\" làm tại nhà, trả hoa hồng đơn hàng ảo",
+    "summary": "Nạn nhân được mời làm cộng tác viên \"like, share, đặt đơn ảo\" trên sàn thương mại điện tử, nhận hoa hồng vài đơn đầu để tạo tin tưởng. Đến đơn giá trị lớn, hệ thống báo lỗi và yêu cầu nạp thêm tiền để \"giải ngân\", nạp bao nhiêu cũng không rút được.",
+    "takeaway": "Công việc yêu cầu nạp tiền trước để nhận hoa hồng luôn là lừa đảo. Việc thật không bao giờ bắt người lao động trả tiền trước.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0010",
+    "scam_category": "tuyển dụng việc nhẹ lương cao",
+    "title": "Tuyển CTV xử lý đơn hàng cho sàn thương mại điện tử giả",
+    "summary": "Kẻ gian lập website/app giả mạo sàn thương mại điện tử lớn, mời làm CTV \"xử lý đơn tồn kho\" với hoa hồng cao. Nạn nhân phải ứng tiền mua đơn trước, càng làm nhiều đơn giá trị cao càng mất nhiều tiền, cuối cùng bị chặn liên lạc.",
+    "takeaway": "Kiểm tra website chính thức của sàn thương mại điện tử trước khi tin bất kỳ lời mời CTV nào qua Zalo/Telegram lạ.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0011",
+    "scam_category": "giả người thân mượn tiền",
+    "title": "Hack Zalo/Facebook người quen để nhắn tin mượn tiền gấp",
+    "summary": "Kẻ gian chiếm quyền truy cập tài khoản mạng xã hội của một người, sau đó nhắn tin cho bạn bè/người thân trong danh sách bạn bè với lý do \"đang cần gấp\", đề nghị chuyển khoản ngay và tránh gọi điện vì \"đang họp/mất sóng\".",
+    "takeaway": "Luôn gọi điện thoại trực tiếp xác nhận trước khi chuyển tiền, kể cả khi tin nhắn đến từ tài khoản người thân quen — tài khoản có thể đã bị chiếm quyền.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0012",
+    "scam_category": "giả người thân mượn tiền",
+    "title": "Giả giọng nói người thân qua cuộc gọi deepfake xin tiền gấp",
+    "summary": "Nạn nhân nhận cuộc gọi có giọng nói giống hệt con/cháu, báo đang gặp tai nạn/bị bắt giữ, cần chuyển tiền ngay để \"giải quyết\". Giọng nói được tạo bằng công nghệ deepfake từ các đoạn video công khai trên mạng xã hội của nạn nhân thật.",
+    "takeaway": "Khi có yêu cầu chuyển tiền khẩn cấp qua điện thoại, hãy gác máy và gọi lại trực tiếp qua số quen thuộc hoặc hỏi thông tin chỉ người thân mới biết để xác minh.",
+    "source": "Tổng hợp từ báo chí",
+    "video_url": null,
+    "audio_script": "Bà Hoa đang nấu cơm thì điện thoại reo. Nhấc máy lên, bà nghe đúng giọng nói của con trai mình, hoảng hốt báo tin vừa gây tai nạn giao thông, đang bị giữ tại cơ quan công an, cần bà chuyển gấp hai mươi triệu đồng để giải quyết, nếu không sẽ bị tạm giam. Giọng nói giống hệt con trai, từ cách xưng hô đến ngữ điệu quen thuộc, khiến bà tin ngay không chút nghi ngờ. May mắn thay, trước khi kịp chuyển tiền, bà gọi lại đúng số điện thoại quen thuộc của con trai và phát hiện con vẫn đang đi làm bình thường, không hề có chuyện gì xảy ra. Hóa ra giọng nói kia được tạo ra bằng công nghệ deepfake âm thanh, kẻ gian chỉ cần vài đoạn video con trai bà từng đăng công khai trên mạng xã hội là đủ dữ liệu để giả giọng gần như hoàn hảo. Công nghệ này ngày càng phổ biến và khó phân biệt bằng tai thường. Cách phòng tránh hiệu quả nhất không phải là cố nghe cho kỹ giọng nói, mà là luôn gác máy và tự gọi lại qua số điện thoại quen thuộc, hoặc hỏi một thông tin riêng tư chỉ người thân thật mới biết để xác minh trước khi chuyển bất kỳ khoản tiền nào."
+  },
+  {
+    "case_id": "0013",
+    "scam_category": "giả shipper/giao hàng",
+    "title": "Shipper giả gọi báo \"đơn hàng bị lỗi\", yêu cầu chuyển khoản lại",
+    "summary": "Nạn nhân nhận cuộc gọi tự xưng shipper thông báo giao nhầm đơn/đơn lỗi hệ thống, yêu cầu quét mã QR hoặc bấm link để \"hoàn tiền\", thực chất là link chiếm quyền tài khoản ngân hàng.",
+    "takeaway": "Không quét mã QR hay bấm link do người lạ gửi để \"nhận hoàn tiền\" — chuyển tiền vào tài khoản là hành động của người trả tiền, không phải người nhận.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0014",
+    "scam_category": "giả shipper/giao hàng",
+    "title": "Đơn hàng không đặt, thu hộ COD hộ người khác",
+    "summary": "Nạn nhân nhận được gói hàng không đặt kèm yêu cầu thanh toán COD giá trị nhỏ. Sau khi trả tiền và mở ra, bên trong là hàng rác/giấy vụn. Đây thường là chiêu \"thử phản ứng\" trước khi gửi đơn giá trị lớn hơn hoặc thu thập dữ liệu địa chỉ thật.",
+    "takeaway": "Kiểm tra kỹ đơn hàng COD với lịch sử mua sắm thực tế của bản thân/gia đình trước khi thanh toán, từ chối nhận nếu không chắc chắn đã đặt.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0015",
+    "scam_category": "tình cảm qua mạng",
+    "title": "\"Người yêu online\" hứa gửi quà từ nước ngoài, yêu cầu đóng phí hải quan",
+    "summary": "Nạn nhân quen một người tự xưng đang làm việc/ở nước ngoài qua mạng xã hội, sau thời gian trò chuyện tình cảm, người này báo đã gửi quà giá trị lớn và yêu cầu nạn nhân đóng \"phí hải quan\", \"phí thông quan\" để nhận quà — số tiền càng đóng càng bị đòi thêm.",
+    "takeaway": "Không có món quà thật nào yêu cầu người nhận đóng phí lớn trước khi nhận. Cẩn trọng với các mối quan hệ online nhanh chóng chuyển sang xin tiền.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0016",
+    "scam_category": "giả tổng đài/nhà mạng",
+    "title": "Giả tổng đài viễn thông báo \"chuẩn hóa thông tin thuê bao\"",
+    "summary": "Kẻ gian giả danh nhân viên nhà mạng gọi điện thông báo thuê bao sắp bị khóa do thông tin chưa chuẩn hóa, yêu cầu cung cấp mã OTP hoặc bấm vào đường link để \"xác thực lại\", thực chất chiếm quyền số điện thoại.",
+    "takeaway": "Nhà mạng thật không yêu cầu đọc mã OTP qua điện thoại. Việc chuẩn hóa thông tin thuê bao chỉ thực hiện tại điểm giao dịch chính thức hoặc ứng dụng của nhà mạng.",
+    "source": "Tổng hợp từ báo chí",
+    "audio_script": "Anh Đức nhận được cuộc gọi từ người tự xưng là nhân viên tổng đài nhà mạng, thông báo thuê bao của anh sắp bị khóa hai chiều vì thông tin đăng ký chưa được chuẩn hóa theo quy định mới. Để tránh bị khóa, anh chỉ cần bấm vào đường link được gửi qua tin nhắn để xác thực lại thông tin, hoặc đọc mã OTP để nhân viên hỗ trợ cập nhật giúp. Vì sợ mất số điện thoại đã dùng nhiều năm, anh Đức định làm theo ngay lập tức. May mắn dừng lại kịp lúc khi nhớ ra: nhà mạng thật không bao giờ gọi điện yêu cầu đọc mã OTP, và việc chuẩn hóa thông tin thuê bao theo quy định chỉ được thực hiện tại điểm giao dịch chính thức của nhà mạng hoặc qua ứng dụng chính chủ, không qua đường link lạ gửi trong tin nhắn. Nếu bấm vào link giả và đọc mã OTP, kẻ gian có thể chiếm quyền kiểm soát số điện thoại, từ đó chiếm luôn các tài khoản ngân hàng, mạng xã hội liên kết với số đó. Khi nhận được cuộc gọi tương tự, cách an toàn nhất là tự liên hệ tổng đài chính thức của nhà mạng qua số hotline in trên hóa đơn hoặc ứng dụng để xác minh."
+  },
+  {
+    "case_id": "0017",
+    "scam_category": "giả ứng dụng ngân hàng",
+    "title": "Giả nhân viên ngân hàng hướng dẫn \"cập nhật sinh trắc học\" qua app giả",
+    "summary": "Lợi dụng quy định xác thực sinh trắc học khi chuyển khoản, kẻ gian gọi điện tự xưng nhân viên ngân hàng, hướng dẫn cài đặt ứng dụng giả mạo để \"cập nhật khuôn mặt/CCCD\", từ đó chiếm quyền điều khiển điện thoại và tài khoản ngân hàng.",
+    "takeaway": "Chỉ cập nhật sinh trắc học trực tiếp tại quầy giao dịch hoặc qua đúng ứng dụng ngân hàng tải từ App Store/Google Play chính thức, không cài app theo hướng dẫn qua điện thoại.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0018",
+    "scam_category": "lừa đảo qua mã QR",
+    "title": "Dán đè mã QR giả tại điểm gửi xe, quầy thanh toán",
+    "summary": "Kẻ gian in mã QR giả dán chồng lên mã QR thanh toán thật tại bãi gửi xe, quán ăn. Khi khách quét để trả tiền, tiền chuyển thẳng vào tài khoản kẻ gian thay vì chủ quán, khách không nhận ra vì giao diện quét mã trông giống hệt.",
+    "takeaway": "Kiểm tra kỹ tên chủ tài khoản hiện ra sau khi quét mã QR trước khi bấm chuyển tiền, đặc biệt tại các điểm công cộng dễ bị dán đè mã giả.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0019",
+    "scam_category": "trúng thưởng giả",
+    "title": "Trúng vé máy bay/voucher du lịch \"0 đồng\", chỉ cần trả phí xử lý",
+    "summary": "Nạn nhân nhận thông báo trúng vé máy bay hoặc gói du lịch miễn phí, chỉ cần thanh toán khoản phí xử lý/phí sân bay nhỏ để nhận. Sau khi chuyển khoản, bên tổ chức biến mất hoặc tiếp tục đòi thêm nhiều loại phí khác.",
+    "takeaway": "Giải thưởng thật không phát sinh nhiều lần phí phát sinh sau khi thông báo trúng thưởng. Nghi ngờ ngay khi phải trả tiền để nhận một thứ được quảng cáo là miễn phí.",
+    "source": "Tổng hợp từ báo chí"
+  },
+  {
+    "case_id": "0020",
+    "scam_category": "đầu tư giả",
+    "title": "Mời tham gia nhóm \"chuyên gia chứng khoán\" dẫn dắt đầu tư ảo",
+    "summary": "Nạn nhân được mời vào nhóm Zalo/Telegram tự xưng có \"chuyên gia\" phân tích chứng khoán/tiền ảo, dẫn dắt đầu tư qua một sàn không rõ nguồn gốc. Ban đầu cho rút lãi nhỏ để tạo lòng tin, đến khi nạp số tiền lớn thì sàn sập hoặc khóa tài khoản.",
+    "takeaway": "Không có \"chuyên gia\" nào đảm bảo lợi nhuận chắc chắn. Chỉ đầu tư qua các sàn được cấp phép chính thức, không theo lời mời từ nhóm chat lạ.",
+    "source": "Tổng hợp từ báo chí"
+  }
+]

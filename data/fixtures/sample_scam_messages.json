@@ -1,0 +1,62 @@
+[
+  {
+    "text": "Chúc mừng số điện thoại của bạn may mắn trúng giải đặc biệt 500 triệu đồng từ chương trình tri ân khách hàng. Vui lòng đóng phí nhận thưởng 2 triệu đồng để nhận giải trong 24h.",
+    "expected_category": "trúng thưởng giả",
+    "expected_level": "HIGH"
+  },
+  {
+    "text": "Tài khoản của quý khách có dấu hiệu giao dịch bất thường, vui lòng cung cấp mã OTP vừa gửi để nhân viên xác minh và mở khóa tài khoản.",
+    "expected_category": "giả mạo ngân hàng",
+    "expected_level": "HIGH"
+  },
+  {
+    "text": "Cơ hội đầu tư sinh lời 30%/tháng, cam kết hoàn vốn nếu không đúng như quảng cáo. Chỉ cần nạp tối thiểu 5 triệu để bắt đầu.",
+    "expected_category": "đầu tư giả",
+    "expected_level": "HIGH"
+  },
+  {
+    "text": "Xin chào, tôi là nhân viên bảo hiểm gọi để thông báo lịch tái tục hợp đồng bảo hiểm của bạn vào ngày 15 tháng sau.",
+    "expected_category": "Không phát hiện",
+    "expected_level": "LOW"
+  },
+  {
+    "text": "Tôi là điều tra viên, số điện thoại của anh liên quan đến vụ án rửa tiền. Anh cần chuyển toàn bộ số dư vào tài khoản tạm giữ của cơ quan điều tra để chứng minh vô tội.",
+    "expected_category": "giả công an/cơ quan chức năng",
+    "expected_level": "HIGH"
+  },
+  {
+    "text": "Chương trình khuyến mãi: nạp thẻ điện thoại 100k tặng thêm 20k, áp dụng đến hết tháng.",
+    "expected_category": "Không phát hiện",
+    "expected_level": "LOW"
+  },
+  {
+    "text": "Ngân hàng thông báo tài khoản của quý khách sắp bị đóng băng do chưa xác minh tài khoản, vui lòng cung cấp mã OTP ngay để tránh gián đoạn giao dịch.",
+    "expected_category": "giả mạo ngân hàng",
+    "expected_level": "HIGH"
+  },
+  {
+    "text": "Đầu tư vào quỹ của chúng tôi, lợi nhuận cam kết hoàn vốn 100% trong 30 ngày, không rủi ro.",
+    "expected_category": "đầu tư giả",
+    "expected_level": "HIGH"
+  },
+  {
+    "text": "Cơ quan điều tra mời anh/chị lên làm việc liên quan đến vụ án rửa tiền, đề nghị giữ bí mật và không thông báo cho người thân.",
+    "expected_category": "giả công an/cơ quan chức năng",
+    "expected_level": "MEDIUM"
+  },
+  {
+    "text": "Nhận giải tri ân khách hàng thân thiết, chỉ cần đóng phí thủ tục để nhận quà.",
+    "expected_category": "trúng thưởng giả",
+    "expected_level": "MEDIUM"
+  },
+  {
+    "text": "Xin chào, đây là lịch nhắc lịch hẹn khám răng định kỳ vào tuần sau, quý khách vui lòng xác nhận lịch.",
+    "expected_category": "Không phát hiện",
+    "expected_level": "LOW"
+  },
+  {
+    "text": "Chào anh, shop bên em có chương trình giảm giá 20% cho đơn hàng trên 500k, áp dụng đến hết tuần.",
+    "expected_category": "Không phát hiện",
+    "expected_level": "LOW"
+  }
+]
