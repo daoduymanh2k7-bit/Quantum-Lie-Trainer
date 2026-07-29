@@ -39,8 +39,8 @@ Lừa đảo tài chính qua điện thoại/tin nhắn (giả ngân hàng, gi�
 | Module | Chức năng | Vị trí code |
 |---|---|---|
 | 🔍 **Camera Kính Lúp** | Dán văn bản (hoặc đọc bằng giọng nói) một tin nhắn/lời mời nghi vấn → chấm điểm rủi ro, chỉ ra loại lừa đảo và các dấu hiệu (`red_flags`) cụ thể | `backend/vision/` |
-| 📞 **Scam Arena** | Cuộc gọi lừa đảo giả lập theo 3 kịch bản (giả ngân hàng, giả công an, giả trúng thưởng), có thoại bằng giọng nói; sau cuộc gọi được chấm điểm, chỉ ra từng lỗi ("đã đọc OTP", "đồng ý chuyển khoản"...) kèm gợi ý khắc phục | `backend/arena/` |
-| 📚 **Kho tri thức & Daily Scam Alert** | 20 case study thật (11 loại lừa đảo khác nhau), gợi ý case tiếp theo cùng chuyên đề, gamification nhẹ (điểm/streak/huy hiệu) | `backend/knowledge/` |
+| 📞 **Cuộc gọi giả lập** | Cuộc gọi lừa đảo giả lập theo 3 kịch bản (giả ngân hàng, giả công an, giả trúng thưởng), có thoại bằng giọng nói; sau cuộc gọi được chấm điểm, chỉ ra từng lỗi ("đã đọc OTP", "đồng ý chuyển khoản"...) kèm gợi ý khắc phục | `backend/arena/` |
+| 📚 **Kho kiến thức & Daily Scam Alert** | 20 case study thật (11 loại lừa đảo khác nhau), gợi ý case tiếp theo cùng chuyên đề, gamification nhẹ (điểm/streak/huy hiệu) | `backend/knowledge/` |
 
 Ba module trao đổi dữ liệu qua contract chung tại `backend/models/schemas.py`, chốt trước khi code để 2 người có thể làm song song không cần chờ nhau.
 
@@ -53,8 +53,8 @@ project/
 │   │   ├── schemas.py         # Contract chung — mọi module trao đổi qua đây
 │   │   └── quantum_scorer.py  # Prototype: mạch lượng tử (PennyLane) chấm rủi ro — chưa gắn vào API
 │   ├── vision/                # Camera Kính Lúp: analyzer.py (rule-based) + monte_carlo.py (entry point)
-│   ├── arena/                 # Scam Arena: kịch bản (scam_llm.py) + chấm điểm (scorer.py) + voice.py (STT/TTS)
-│   ├── knowledge/             # Kho tri thức: knowledge_base.py
+│   ├── arena/                 # Cuộc gọi giả lập: kịch bản (scam_llm.py) + chấm điểm (scorer.py) + voice.py (STT/TTS)
+│   ├── knowledge/             # Kho kiến thức: knowledge_base.py
 │   └── api/                   # Router FastAPI cho từng module, main.py chỉ gộp lại
 ├── frontend/static/           # Giao diện: index.html + css/ + js/ (HTML/CSS/JS thuần, không build step)
 ├── data/fixtures/             # case_studies.json (20 case), sample_scam_messages.json
