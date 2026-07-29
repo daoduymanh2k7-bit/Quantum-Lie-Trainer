@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Tiêu đề + mô tả hiển thị trên topbar, đổi theo tab đang chọn.
   const TAB_TITLES = {
-    vision: ["Camera Kính Lúp", "Dán nội dung tin nhắn / lời mời đáng ngờ vào đây để kiểm tra"],
-    arena: ["Scam Arena — Thực Chiến", "Luyện phản xạ chống lừa đảo qua các kịch bản mô phỏng cuộc gọi"],
-    knowledge: ["Kho tri thức & Daily Scam Alert", "Học 1 case mỗi ngày, tích điểm và giữ streak"],
+    vision: ["Camera kính lúp", "Dán nội dung tin nhắn / lời mời đáng ngờ vào đây để kiểm tra"],
+    arena: ["Cuộc gọi giả lập — Thực Chiến", "Luyện phản xạ chống lừa đảo qua các kịch bản mô phỏng cuộc gọi"],
+    knowledge: ["Kho kiến thức & Daily Scam Alert", "Học 1 case mỗi ngày, tích điểm và giữ streak"],
   };
   const pageTitleEl = document.getElementById("page-title");
   const pageSubtitleEl = document.getElementById("page-subtitle");
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   SidebarNav.init({
     onNewChat: () => {
-      // Nút "Kiểm tra mới": quay về tab Camera Kính Lúp với ô nhập trống.
+      // Nút "Kiểm tra mới": quay về tab Camera kính lúp với ô nhập trống.
       const visionTabBtn = document.querySelector('.tab-btn[data-tab="vision"]');
       if (visionTabBtn) visionTabBtn.click();
       VisionTab.resetInput();
