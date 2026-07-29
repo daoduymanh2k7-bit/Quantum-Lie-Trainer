@@ -318,7 +318,7 @@ const KnowledgeTab = (() => {
     } catch (err) {
       if (errEl) {
         errEl.hidden = false;
-        errEl.textContent = "⚠️ Không tạo được giọng đọc (có thể do mất mạng) — bạn vẫn đọc được nội dung bên dưới.";
+        errEl.textContent = "⚠️ Không tạo được giọng đọc: " + err.message + " — bạn vẫn đọc được nội dung bên dưới.";
       }
       if (audioEl) audioEl.hidden = true;
     }

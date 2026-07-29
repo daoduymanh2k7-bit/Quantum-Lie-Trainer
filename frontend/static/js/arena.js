@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const scenarioList = document.getElementById("arena-scenario-list");
     const scenarioLabel = document.getElementById("arena-scenario-label");
+    const callTimerEl = document.getElementById("arena-call-timer");
     const transcriptBox = document.getElementById("arena-transcript");
     const statusIndicator = document.querySelector("#arena-session .status-indicator");
 
@@ -25,6 +26,32 @@ document.addEventListener("DOMContentLoaded", () => {
     let aiFinishedSpeakingAt = null; // mốc thời gian AI vừa nói xong lượt gần nhất — dùng đo elapsed_seconds
     let isRecording = false;
     let callEnded = false; // true khi kẻ gian đã "cúp máy" hoặc hết kịch bản
+    let callTimerInterval = null; // đồng hồ đếm giờ hiển thị trên UI, giống cuộc gọi thật
+    let callStartedAt = null;
+
+    // ---- Đồng hồ đếm giờ cuộc gọi (chỉ hiển thị, không dùng để chấm điểm) ----
+    function formatCallDuration(ms) {
+        const totalSeconds = Math.floor(ms / 1000);
+        const mm = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+        const ss = String(totalSeconds % 60).padStart(2, "0");
+        return `${mm}:${ss}`;
+    }
+
+    function startCallTimer() {
+        stopCallTimer();
+        callStartedAt = Date.now();
+        if (callTimerEl) callTimerEl.textContent = "00:00";
+        callTimerInterval = setInterval(() => {
+            if (callTimerEl) callTimerEl.textContent = formatCallDuration(Date.now() - callStartedAt);
+        }, 1000);
+    }
+
+    function stopCallTimer() {
+        if (callTimerInterval) {
+            clearInterval(callTimerInterval);
+            callTimerInterval = null;
+        }
+    }
 
     // ---- Màn hình chọn kịch bản: lấy từ backend thật ----
     function renderScenarios(scenarios) {
@@ -50,12 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // ---- Giọng nói: dùng gTTS thật qua backend, không dùng speechSynthesis trình duyệt ----
     async function playScammerVoice(text) {
         if (!audioPlayer) return;
+        if (btnReplayVoice) btnReplayVoice.classList.add("is-playing");
         try {
             const blob = await Api.speakText(text);
             const url = URL.createObjectURL(blob);
             audioPlayer.src = url;
-            audioPlayer.hidden = false;
-            audioPlayer.controls = true;
             await audioPlayer.play().catch(() => { /* autoplay có thể bị chặn, không sao */ });
             await new Promise((resolve) => {
                 audioPlayer.onended = resolve;
@@ -67,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Không tạo được giọng đọc:", err);
         } finally {
             aiFinishedSpeakingAt = Date.now();
+            if (btnReplayVoice) btnReplayVoice.classList.remove("is-playing");
         }
     }
 
@@ -99,9 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
         transcriptBox.innerText = "Đang kết nối...";
         if (btnMic) { btnMic.disabled = false; }
         micBtnText.innerText = "Chạm để nói (Micro)";
+        startCallTimer();
 
         if (audioPlayer) {
-            audioPlayer.hidden = true;
             audioPlayer.src = "";
         }
 
@@ -189,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnFinish) {
         btnFinish.onclick = async () => {
             if (audioPlayer) audioPlayer.pause();
+            stopCallTimer();
             sessionScreen.hidden = true;
             resultScreen.hidden = false;
 
@@ -243,13 +271,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnCancel) {
         btnCancel.onclick = async () => {
             if (audioPlayer) audioPlayer.pause();
+            stopCallTimer();
             if (isRecording && window.appAudioRecorder) {
                 await window.appAudioRecorder.stop();
                 isRecording = false;
                 btnMic.classList.remove("recording");
                 micBtnText.innerText = "Chạm để nói (Micro)";
             }
-            audioPlayer.hidden = true;
             audioPlayer.src = "";
             sessionScreen.hidden = true;
             pickerScreen.hidden = false;

@@ -1612,10 +1612,10 @@ body.sidebar-is-expanded .chat-composer {
 
 /* ================= MÀN HÌNH 2: CUỘC GỌI THỰC CHIẾN ================= */
 .phone-call-ui {
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%) !important;
+  background: radial-gradient(circle at 50% 0%, #243047 0%, #0f172a 55%) !important;
   border-radius: 36px !important;
   /* Bo góc tròn như điện thoại thật */
-  padding: 50px 20px 40px 20px !important;
+  padding: 14px 20px 40px 20px !important;
   color: white !important;
   display: flex !important;
   flex-direction: column !important;
@@ -1627,12 +1627,45 @@ body.sidebar-is-expanded .chat-composer {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
   border: 8px solid #334155 !important;
   /* Viền điện thoại */
+  position: relative;
+  overflow: hidden;
 }
+
+/* Thanh trạng thái giả (giờ/sóng/wifi/pin) — chi tiết nhỏ nhưng quyết định
+   cảm giác "đây là ảnh chụp màn hình điện thoại thật" thay vì một cái thẻ. */
+.call-statusbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 6px 24px 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.2px;
+}
+
+.call-statusbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.call-statusbar-icons svg {
+  fill: currentColor;
+}
+
+.statusbar-signal { width: 16px; height: 11px; }
+.statusbar-wifi { width: 14px; height: 11px; }
+.statusbar-battery { width: 23px; height: 11px; }
 
 .call-header {
   text-align: center;
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .caller-avatar-ring {
@@ -1645,6 +1678,16 @@ body.sidebar-is-expanded .chat-composer {
   align-items: center;
   justify-content: center;
   animation: pulse-ring 2s infinite;
+  position: relative;
+}
+
+.caller-avatar-glow {
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.35), transparent 70%);
+  filter: blur(6px);
+  z-index: -1;
 }
 
 .caller-avatar {
@@ -1662,18 +1705,34 @@ body.sidebar-is-expanded .chat-composer {
   font-size: 30px !important;
   font-weight: bold;
   color: #ffffff !important;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
-.call-status-badge {
+/* Badge loại lừa đảo — thông tin huấn luyện, không phải chi tiết của 1 cuộc gọi thật */
+.scam-type-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 7px 18px;
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 15px;
   color: #cbd5e1;
+  margin-bottom: 10px;
+}
+
+/* Badge thời lượng cuộc gọi — giống đúng dòng "Đang gọi... 00:14" của điện thoại thật */
+.call-timer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #86efac;
+  font-variant-numeric: tabular-nums;
+}
+
+.call-timer-icon {
+  font-size: 12px;
 }
 
 .pulsing-dot {
@@ -1692,6 +1751,8 @@ body.sidebar-is-expanded .chat-composer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .status-indicator {
@@ -1716,48 +1777,68 @@ body.sidebar-is-expanded .chat-composer {
   font-weight: 600 !important;
 }
 
-.call-body-actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.btn-replay-voice {
+/* Nút "Nghe lại" — thanh sóng âm chạy thay cho thanh tua/volume của trình
+   phát audio gốc, vì cuộc gọi thật không hiển thị thanh tua cho lời thoại. */
+.voice-wave-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
+  align-self: center;
+  margin-top: 14px;
   background: rgba(255, 255, 255, 0.1) !important;
   color: #cbd5e1 !important;
   border: 1px solid rgba(255, 255, 255, 0.18) !important;
   border-radius: 999px;
-  padding: 8px 16px;
+  padding: 10px 20px;
   font-size: 14px;
   cursor: pointer;
 }
 
-.btn-replay-voice:hover {
+.voice-wave-btn:hover {
   background: rgba(255, 255, 255, 0.18) !important;
 }
 
-#arena-audio-player {
-  width: 100%;
-  margin-top: 12px;
+.voice-wave-bars {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+}
+
+.voice-wave-bars i {
+  display: block;
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: #86efac;
+  animation: none;
+}
+
+/* Khi đang phát giọng đọc, các thanh nhảy lên xuống như visualizer thật */
+.voice-wave-btn.is-playing .voice-wave-bars i {
+  animation: wave-bounce 0.9s ease-in-out infinite;
+}
+
+.voice-wave-bars i:nth-child(1) { animation-delay: 0s; }
+.voice-wave-bars i:nth-child(2) { animation-delay: 0.12s; }
+.voice-wave-bars i:nth-child(3) { animation-delay: 0.24s; }
+.voice-wave-bars i:nth-child(4) { animation-delay: 0.36s; }
+.voice-wave-bars i:nth-child(5) { animation-delay: 0.48s; }
+
+@keyframes wave-bounce {
+  0%, 100% { height: 6px; }
+  50% { height: 16px; }
 }
 
 .call-footer {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 16px;
   margin-top: 30px;
-}
-
-.btn-cancel-call {
-  background: transparent !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  color: #cbd5e1 !important;
-  box-shadow: none !important;
+  position: relative;
+  z-index: 1;
 }
 
 /* ---------------- Topbar icon buttons (dùng cho nút phụ trong topbar) ---------------- */
@@ -1810,10 +1891,52 @@ body.sidebar-is-expanded .chat-composer {
   animation: pulse-ring 1s infinite;
 }
 
-.btn-end-call {
+/* Nút cúp máy dạng tròn đỏ — đúng "biểu tượng phổ quát" của nút kết thúc
+   cuộc gọi trên mọi điện thoại, dễ nhận ra hơn hẳn 1 nút pill dài. */
+.call-end-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.call-btn-fab {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: none !important;
   background-color: #ef4444 !important;
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
-  margin-top: 10px;
+  color: white !important;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(135deg);
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.45);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.call-btn-fab:active {
+  transform: rotate(135deg) scale(0.92);
+}
+
+.call-end-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fca5a5;
+}
+
+.call-btn-text {
+  background: transparent !important;
+  border: none !important;
+  color: #94a3b8 !important;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px;
 }
 
 /* ================= MÀN HÌNH 3: KẾT QUẢ & CHẤM ĐIỂM ================= */

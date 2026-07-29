@@ -170,15 +170,30 @@
           <!-- ================= MÀN HÌNH CUỘC GỌI THỰC CHIẾN ================= -->
           <div id="arena-session" class="phone-call-ui" hidden>
 
+            <!-- Thanh trạng thái giả — tăng cảm giác "đây là màn hình điện thoại thật" -->
+            <div class="call-statusbar" aria-hidden="true">
+              <span class="call-statusbar-time">9:41</span>
+              <span class="call-statusbar-icons">
+                <svg viewBox="0 0 18 12" class="statusbar-signal"><rect x="0" y="7" width="3" height="5" rx="0.5"/><rect x="5" y="5" width="3" height="7" rx="0.5"/><rect x="10" y="3" width="3" height="9" rx="0.5"/><rect x="15" y="0" width="3" height="12" rx="0.5"/></svg>
+                <svg viewBox="0 0 16 12" class="statusbar-wifi"><path d="M8 9.6a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6Zm0-3.4c1.7 0 3.2.6 4.4 1.7l-1.4 1.5A4.2 4.2 0 0 0 8 8.2c-1.1 0-2.2.4-3 1.2L3.6 7.9A6.2 6.2 0 0 1 8 6.2Zm0-3.4c2.6 0 5 1 6.8 2.7l-1.4 1.5A8.2 8.2 0 0 0 8 4.8a8.2 8.2 0 0 0-5.4 2.2L1.2 5.5A10.2 10.2 0 0 1 8 2.8Z"/></svg>
+                <svg viewBox="0 0 25 12" class="statusbar-battery"><rect x="0.5" y="0.5" width="21" height="11" rx="2.5" fill="none" stroke="currentColor"/><rect x="2" y="2" width="18" height="8" rx="1.2"/><rect x="22.5" y="4" width="2" height="4" rx="1"/></svg>
+              </span>
+            </div>
+
             <!-- Phần 1: Thông tin người gọi (Giống màn hình điện thoại) -->
             <div class="call-header">
               <div class="caller-avatar-ring">
+                <div class="caller-avatar-glow"></div>
                 <div class="caller-avatar">👤</div>
               </div>
               <h2 class="caller-name">Kẻ Lạ Mặt</h2>
-              <div class="call-status-badge">
+              <div class="scam-type-badge">
                 <span class="pulsing-dot"></span>
-                <span id="arena-scenario-label">00:00 — Cảnh sát giao thông</span>
+                <span id="arena-scenario-label">Cảnh sát giao thông</span>
+              </div>
+              <div class="call-timer-badge">
+                <span class="call-timer-icon">📞</span>
+                <span id="arena-call-timer">00:00</span>
               </div>
             </div>
 
@@ -189,10 +204,11 @@
                 <p id="arena-transcript">Chào bác. Tôi là cán bộ cục CSGT. Bác đang có biên lai phạt nguội 5 triệu
                   đồng...</p>
               </div>
-              <div class="call-body-actions">
-                <button id="arena-replay-voice" class="btn-replay-voice" type="button">🔁 Nghe lại giọng nói</button>
-              </div>
-              <audio id="arena-audio-player" controls hidden></audio>
+              <button id="arena-replay-voice" class="voice-wave-btn" type="button" aria-label="Nghe lại giọng nói">
+                <span class="voice-wave-bars"><i></i><i></i><i></i><i></i><i></i></span>
+                <span class="voice-wave-label">Nghe lại giọng nói</span>
+              </button>
+              <audio id="arena-audio-player" hidden></audio>
             </div>
 
             <!-- Phần 3: Bảng điều khiển (Nút to, rõ ràng cho người già) -->
@@ -202,12 +218,14 @@
                 <span id="mic-btn-text">Chạm để nói (Micro)</span>
               </button>
 
-              <button id="arena-finish-btn" class="call-btn btn-end-call">
-                <span class="icon">📞</span>
-                <span>CÚP MÁY & CHẤM ĐIỂM</span>
-              </button>
+              <div class="call-end-wrap">
+                <button id="arena-finish-btn" class="call-btn-fab" aria-label="Cúp máy và chấm điểm">
+                  <span class="icon">📞</span>
+                </button>
+                <span class="call-end-label">Cúp máy &amp; chấm điểm</span>
+              </div>
 
-              <button id="arena-cancel-btn" class="call-btn btn-cancel-call">
+              <button id="arena-cancel-btn" class="call-btn-text">
                 <span class="icon">◀</span>
                 <span>Dừng lại, quay về chọn kịch bản</span>
               </button>

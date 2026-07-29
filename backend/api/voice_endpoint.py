@@ -13,7 +13,9 @@ router = APIRouter(prefix="/api/voice", tags=["voice"])
 
 # Giới hạn để tránh treo server khi ai đó gửi file/nội dung quá khổ (bản demo, chưa có hàng đợi/queue).
 MAX_AUDIO_BYTES = 15 * 1024 * 1024  # 15MB — đủ cho vài phút ghi âm webm, chặn upload bất thường
-MAX_TTS_CHARS = 800  # đủ cho 1 lượt thoại dài trong Scam Arena, chặn spam văn bản khổng lồ vào gTTS
+# Không còn giới hạn số ký tự cho /speak: Piper chạy local, không tốn phí theo
+# ký tự như API đám mây. Case study ở Kho tri thức có thể dài hơn 800 ký tự
+# (mức cũ dành riêng cho lời thoại ngắn của Scam Arena) nên bỏ hẳn giới hạn.
 
 
 @router.post("/transcribe")
@@ -48,11 +50,6 @@ class SpeakRequest(BaseModel):
 def speak(req: SpeakRequest) -> Response:
     if not req.text or not req.text.strip():
         raise HTTPException(status_code=400, detail="Thiếu nội dung cần đọc.")
-    if len(req.text) > MAX_TTS_CHARS:
-        raise HTTPException(
-            status_code=413,
-            detail=f"Nội dung cần đọc quá dài (tối đa {MAX_TTS_CHARS} ký tự).",
-        )
 
     from backend.arena.voice import text_to_speech
 
@@ -60,4 +57,5 @@ def speak(req: SpeakRequest) -> Response:
         audio_bytes = text_to_speech(req.text)
     except Exception as exc:  # noqa: BLE001
         raise HTTPException(status_code=500, detail=f"Không tạo được giọng đọc: {exc}") from exc
-    return Response(content=audio_bytes, media_type="audio/mpeg")
+    # Piper trả về WAV (trước đây gTTS trả về MP3 -> "audio/mpeg")
+    return Response(content=audio_bytes, media_type="audio/wav")

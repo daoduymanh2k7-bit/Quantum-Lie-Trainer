@@ -42,7 +42,13 @@ const Api = (() => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
       });
-      if (!res.ok) throw new Error("Không tạo được giọng đọc.");
+      if (!res.ok) {
+        // Đọc "detail" thật từ backend (VD: thiếu model Piper, thiếu ffmpeg...)
+        // thay vì luôn hiện 1 câu chung chung -> mới biết được lỗi thật là gì.
+        let detail = "Không tạo được giọng đọc.";
+        try { detail = (await res.json()).detail || detail; } catch (_) { /* body không phải JSON */ }
+        throw new Error(detail);
+      }
       return res.blob();
     },
 
