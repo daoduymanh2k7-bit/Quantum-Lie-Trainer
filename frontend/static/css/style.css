@@ -46,6 +46,10 @@
 
   --radius: 16px;
   --shadow-card: 0 4px 24px rgba(30, 27, 75, 0.06);
+
+  /* Chiều cao thanh tab dưới đáy trên di động — dùng chung để ô chat, nội dung,
+     footer đều chừa đúng khoảng trống, không bị bottom bar che mất. */
+  --mobile-navbar-h: 68px;
 }
 
 /* ---------------- Giao diện tối (bật qua nút trong sidebar) ---------------- */
@@ -102,6 +106,8 @@ html[data-theme="dark"] .tagline {
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* Cảm giác "app": chặn hiệu ứng kéo-làm-mới/bounce của trình duyệt mobile */
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -113,6 +119,9 @@ body {
   /* chữ to mặc định — voice-first, người lớn tuổi */
   line-height: 1.55;
   transition: background 0.2s ease, color 0.2s ease;
+  overscroll-behavior-y: none;
+  /* Bỏ hiệu ứng chạm xám mặc định của trình duyệt trên iOS/Android — giống app thật hơn */
+  -webkit-tap-highlight-color: transparent;
 }
 
 h1,
@@ -487,51 +496,148 @@ button {
     flex-direction: column;
   }
 
+  /* Thanh bên trở thành THANH TAB CỐ ĐỊNH Ở ĐÁY MÀN HÌNH — đúng chuẩn app di động,
+     thay vì thanh ngang cuộn được ở trên đầu (vốn vẫn mang cảm giác "trang web"). */
   .app-sidebar {
-    position: static;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
     height: auto;
     width: 100% !important;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px 14px;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    z-index: 60;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    /* Chừa vùng an toàn cho thanh cử chỉ/home indicator của điện thoại (iPhone...) */
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    box-shadow: 0 -4px 20px rgba(15, 14, 24, 0.08);
   }
 
-  .sidebar-top {
-    margin-bottom: 0;
+  /* Chỉ ẩn phần logo/thu gọn (không cần trên di động) và lịch sử câu hỏi
+     (quá dài để nhét vào 1 dải nhỏ) — GIỮ LẠI avatar, đổi giao diện, tạo mới,
+     nhưng đưa chúng thành 1 DẢI CỐ ĐỊNH Ở TRÊN CÙNG, tách khỏi bottom bar
+     (bottom bar chỉ nên chứa đúng 3 mục điều hướng chính, đúng chuẩn app). */
+  .sidebar-top,
+  .sidebar-section-label,
+  .sidebar-history-list {
+    display: none;
   }
 
   .sidebar-nav {
     flex-direction: row;
-    overflow-x: auto;
+    width: 100%;
+    padding: 6px 6px;
+    gap: 4px;
   }
 
-  .sidebar-history-list,
-  .sidebar-section-label {
-    display: none;
+  .sidebar-nav .tab-btn {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    padding: 8px 2px 7px;
+    border-radius: 14px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.15;
   }
 
-  .sidebar-new-btn {
-    width: auto;
-    margin: 0 0 0 8px;
+  .sidebar-nav .tab-btn .tab-icon {
+    font-size: 1.35rem;
   }
 
+  /* ===== Dải cố định trên cùng: avatar + tên (trái), tạo mới + sáng/tối (phải) ===== */
   .sidebar-bottom {
-    margin-top: 0;
-    padding-top: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    z-index: 65;
+    justify-content: space-between;
+    padding: calc(8px + env(safe-area-inset-top, 0)) 12px 8px;
     border-top: none;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
   }
 
   .sidebar-avatar-wrap {
+    flex-direction: row;
     align-items: center;
+    width: auto;
     padding-left: 0;
   }
 
-  .sidebar-theme-btn {
-    margin-left: 0;
+  .sidebar-user-row {
+    width: auto;
   }
 
-  .sidebar-user-row {
+  .sidebar-username {
+    font-size: 0.85rem;
+  }
+
+  .sidebar-theme-btn {
+    order: 3;
+    margin-left: 2px;
+  }
+
+  .sidebar-new-btn {
+    position: fixed;
+    top: calc(6px + env(safe-area-inset-top, 0));
+    right: 10px;
+    z-index: 66;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    margin: 0;
+    border-radius: 50%;
     justify-content: center;
+    background: var(--color-bg);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Icon-only trên di động — chữ "Kiểm tra mới" quá dài cho 1 nút tròn nhỏ */
+  .sidebar-new-btn .sidebar-label {
+    display: none;
+  }
+
+  /* Chừa khoảng trống TRÊN (cho dải avatar/tạo mới) và DƯỚI (cho bottom bar) để
+     không đè lên tiêu đề trang hay bài kiểm tra/kết quả.
+     Dùng !important vì rule gốc .main-col nằm sau đoạn này trong file. */
+  .main-col {
+    padding-top: calc(52px + env(safe-area-inset-top, 0)) !important;
+    padding-bottom: calc(var(--mobile-navbar-h) + env(safe-area-inset-bottom, 0)) !important;
+  }
+
+  /* Ô chat: bỏ lề trái tính theo thanh bên cũ (giờ không còn ở bên trái nữa),
+     và nâng lên nằm NGAY TRÊN bottom bar thay vì chồng/bị che bởi nó.
+     Bắt buộc dùng !important vì rule gốc (không giới hạn media query) của
+     .chat-composer nằm SAU đoạn này trong file, nếu không sẽ bị ghi đè lại. */
+  .chat-composer {
+    left: 0 !important;
+    right: 0 !important;
+    bottom: calc(var(--mobile-navbar-h) + env(safe-area-inset-bottom, 0)) !important;
+  }
+
+  /* Khoảng chừa cho tin nhắn: đủ chỗ cho CẢ ô chat lẫn bottom bar bên dưới nó,
+     tránh tin nhắn cuối bị 2 lớp cố định này che mất.
+     !important vì rule gốc .chat-thread nằm sau đoạn này trong file. */
+  .chat-thread {
+    padding-bottom: calc(150px + var(--mobile-navbar-h) + env(safe-area-inset-bottom, 0)) !important;
+  }
+
+  /* Footer: nhờ .main-col là flex-column co giãn theo chiều cao màn hình,
+     margin-top: auto sẽ đẩy footer xuống sát mép trên của bottom bar
+     (padding-bottom ở trên đã chừa đúng khoảng đó) — không còn lơ lửng giữa trang.
+     !important vì rule gốc .app-footer nằm sau đoạn này trong file. */
+  .app-footer {
+    margin-top: auto !important;
   }
 }
 
@@ -854,7 +960,13 @@ input:focus {
   transition: left 0.22s ease;
 }
 
-body.sidebar-is-expanded .chat-composer {
+/* SỬA LỖI: trạng thái mở rộng/thu gọn thật sự nằm ở class .is-expanded trên
+   chính #app-sidebar (dùng nhất quán ở mọi nơi khác trong file này), KHÔNG
+   phải class "sidebar-is-expanded" trên <body> như rule cũ bên dưới từng chờ —
+   class đó không tồn tại nên ô chat luôn tưởng thanh bên đang thu gọn, dẫn tới
+   bị lệch/che khi thanh bên thực ra đang mở rộng. Dùng tổ hợp anh em (~) vì
+   #app-sidebar và .main-col là 2 phần tử anh em cùng cấp trong .app-shell. */
+#app-sidebar.is-expanded ~ .main-col .chat-composer {
   left: var(--sidebar-w-expanded);
 }
 
@@ -936,7 +1048,7 @@ body.sidebar-is-expanded .chat-composer {
 
 @media (max-width: 560px) {
   .chat-composer {
-    left: var(--sidebar-w-collapsed) !important;
+    left: 0 !important;
     padding: 10px 12px 14px;
   }
 }

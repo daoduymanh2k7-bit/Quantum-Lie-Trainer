@@ -1,0 +1,39 @@
+{
+  "name": "Quantum Lie Trainer",
+  "short_name": "Lie Trainer",
+  "description": "Phòng tập phản xạ chống lừa đảo tài chính — kiểm tra tin nhắn nghi vấn, luyện phản xạ qua cuộc gọi giả lập, học từ case study thật.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f0e18",
+  "theme_color": "#0f0e18",
+  "lang": "vi",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

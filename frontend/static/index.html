@@ -3,8 +3,20 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, viewport-fit=cover" />
   <title>Quantum Lie Trainer — Phòng tập chống lừa đảo</title>
+
+  <!-- ===== Cấu hình PWA — biến web thành "app" cài được lên máy ===== -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0f0e18" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <!-- iOS Safari không tự đọc manifest.webmanifest, cần khai riêng các thẻ dưới đây -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Lie Trainer" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -19,6 +31,17 @@
         document.documentElement.setAttribute("data-theme", saved || "dark");
       } catch (e) { /* bỏ qua nếu không truy cập được localStorage */ }
     })();
+
+    // Đăng ký Service Worker — điều kiện bắt buộc để trình duyệt cho phép
+    // "Cài đặt ứng dụng". Đặt trong try/catch riêng, lỗi ở đây không được
+    // phép làm hỏng phần còn lại của trang.
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch((err) => {
+          console.warn("Không đăng ký được Service Worker (không ảnh hưởng chức năng chính):", err);
+        });
+      });
+    }
   </script>
 </head>
 
