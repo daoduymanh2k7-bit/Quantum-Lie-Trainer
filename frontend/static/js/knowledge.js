@@ -203,7 +203,7 @@ const KnowledgeTab = (() => {
     const text = shareBox ? shareBox.value : "";
     if (navigator.share) {
       try {
-        await navigator.share({ title: "Lie Trainer — Kho tri thức", text });
+        await navigator.share({ title: "Quantum Lie Trainer — Kho kiến thức thức", text });
       } catch (_) {
         return;
       }

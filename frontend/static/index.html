@@ -329,11 +329,19 @@
                 </div>
               </div>
 
-              <!-- ===== Panel: XEM (placeholder — sẽ hoàn thiện ở bước sau) ===== -->
+              <!-- ===== Panel: XEM (danh sách video + màn xem chi tiết, cùng khuôn với Nghe) ===== -->
               <div id="kb-panel-watch" class="kb-mode-panel" hidden>
-                <div class="result-card">
-                  <h3>🎬 Đang được hoàn thiện</h3>
-                  <p>Dạng "Xem" (video thật + tóm tắt trực quan) sẽ có ở bản cập nhật tiếp theo.</p>
+                <div id="kb-watch-list" class="result-card">
+                  <h3>🎬 Chọn 1 video để xem</h3>
+                  <div id="kb-watch-list-items" class="kb-list"></div>
+                </div>
+
+                <div id="kb-watch-detail" class="result-card" hidden>
+                  <button class="btn-secondary" id="kb-watch-back-btn">◀ Quay lại danh sách</button>
+                  <p class="kb-category" id="kb-watch-category">—</p>
+                  <h3 id="kb-watch-title">—</h3>
+                  <div id="kb-watch-video-frame"></div>
+                  <p id="kb-watch-description"></p>
                 </div>
               </div>
 
@@ -370,7 +378,9 @@
   <script src="js/vision.js"></script>
   <script src="js/arena.js"></script>
   <script src="js/knowledge.js"></script>
+  <script src="js/videos.js"></script>
   <script src="js/main.js"></script>
+  
 </body>
 
 </html>

@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ["VisionTab", typeof VisionTab !== "undefined" ? VisionTab : null],
     ["ArenaTab", typeof ArenaTab !== "undefined" ? ArenaTab : null],
     ["KnowledgeTab", typeof KnowledgeTab !== "undefined" ? KnowledgeTab : null],
+    ["VideosTab", typeof VideosTab !== "undefined" ? VideosTab : null],
   ].forEach(([name, tab]) => {
     try {
       if (!tab) throw new Error(`${name} không tồn tại — kiểm tra file JS tương ứng có export đúng biến này không.`);
