@@ -52,7 +52,7 @@ project/
 │   ├── models/
 │   │   ├── schemas.py         # Contract chung — mọi module trao đổi qua đây
 │   │   └── quantum_scorer.py  # Prototype: mạch lượng tử (PennyLane) chấm rủi ro — chưa gắn vào API
-│   ├── vision/                # Camera Kính Lúp: analyzer.py (rule-based) + monte_carlo.py (entry point)
+│   ├── vision/                # Camera kính lúp: analyzer.py (rule-based) + monte_carlo.py (entry point)
 │   ├── arena/                 # Cuộc gọi giả lập: kịch bản (scam_llm.py) + chấm điểm (scorer.py) + voice.py (STT/TTS)
 │   ├── knowledge/             # Kho kiến thức: knowledge_base.py
 │   └── api/                   # Router FastAPI cho từng module, main.py chỉ gộp lại
